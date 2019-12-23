@@ -18,17 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
  * ==========================================================================
  */
 @Controller
-public class HelloController {
+public class IndexController {
 
     /**
-     * 故意做个修改
-     * @param name
-     * @param model
+     * 根目录
      * @return
      */
-    @GetMapping("/hello")
-    public String greeting(@RequestParam(name="name") String name, Model model) {
-        model.addAttribute("name", name);
-        return "hello";
+    @GetMapping("/")
+    public String index() {
+        return "index";
     }
 }
