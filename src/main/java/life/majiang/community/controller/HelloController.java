@@ -20,6 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HelloController {
 
+    /**
+     * 故意做个修改
+     * @param name
+     * @param model
+     * @return
+     */
     @GetMapping("/hello")
     public String greeting(@RequestParam(name="name") String name, Model model) {
         model.addAttribute("name", name);
