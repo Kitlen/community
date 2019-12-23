@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Revision History:
  * Version          Date               Author			Comments
  * 1.0         	2019-12-20		kitlen			Create file
- * =========================================================================
+ * ==========================================================================
  */
 @Controller
 public class HelloController {
