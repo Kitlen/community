@@ -60,11 +60,13 @@ public class AuthorizeController {
         dto.setState(state);
         String accessToken = githupProvider.getAccessToken(dto);
         GithupUser githupUser = githupProvider.getUser(accessToken);
-        if (githupUser != null) {
+        if (githupUser != null && githupUser.getId() != null) {
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
             user.setName(githupUser.getName());
+            user.setBio(githupUser.getBio());
+            user.setAvatarUrl(githupUser.getAvatarUrl());
             user.setAccountId(String.valueOf(githupUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
