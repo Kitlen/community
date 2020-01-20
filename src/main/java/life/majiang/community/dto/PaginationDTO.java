@@ -24,22 +24,14 @@ public class PaginationDTO {
     private Boolean showFirstPage = true;
     private Boolean showNext = true;
     private Boolean showEndPage = true;
-    private Integer totalPage = 0;
+    private Integer totalPage ;
     private Integer page;
     private List<Integer> pages = new ArrayList<>();
 
-    public void setPagination(Integer totalCount, Integer page, Integer size) {
-
-        totalPage = (int) Math.ceil(totalCount / size);
-
-        if (page < 1) {
-            page = 1;
-        }
-        if (page > totalPage) {
-            page = totalPage;
-        }
-
+    public void setPagination(Integer totalPage, Integer page) {
+        this.totalPage = totalPage;
         this.page = page;
+
         pages.add(page);
         for (int i = 1; i <= 3; i++) {
             if (page - i > 0) {
