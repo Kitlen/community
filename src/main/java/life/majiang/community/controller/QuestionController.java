@@ -3,19 +3,13 @@ package life.majiang.community.controller;
 import life.majiang.community.dto.PaginationDTO;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.mapper.QuestionMapper;
-import life.majiang.community.mapper.UserMapper;
-import life.majiang.community.model.Question;
-import life.majiang.community.model.User;
 import life.majiang.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * kitlen All rights reserved.
@@ -30,7 +24,7 @@ import java.util.List;
  * ==========================================================================
  */
 @Controller
-public class IndexController {
+public class QuestionController {
 
     @Autowired
     private QuestionService questionService;
@@ -39,12 +33,11 @@ public class IndexController {
      * 根目录
      * @return
      */
-    @GetMapping("/")
-    public String index(@RequestParam(name="page" ,defaultValue = "1") Integer page,
-                        @RequestParam(name="size",defaultValue = "2")Integer size,
+    @GetMapping("/question/{id}")
+    public String question(@PathVariable(name="id" ) Integer id,
                         Model model) {
-        PaginationDTO paginationDTO = questionService.list(page, size);
-        model.addAttribute("pagination",paginationDTO);
-        return "index";
+        QuestionDTO questionDTO = questionService.getById(id);
+        model.addAttribute("question",questionDTO);
+        return "question";
     }
 }
