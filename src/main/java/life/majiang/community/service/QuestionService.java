@@ -101,4 +101,16 @@ public class QuestionService {
         return questionDTO;
     }
 
+    public void createOrUpdate(Question question) {
+        Question dbQuestion = questionMapper.getById(question.getId());
+        if (dbQuestion == null ){
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(question.getGmtCreate());
+            questionMapper.create(question);
+        } else {
+            question.setGmtModified(System.currentTimeMillis());
+            questionMapper.update(question);
+        }
+
+    }
 }
