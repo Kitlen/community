@@ -28,7 +28,7 @@ import java.util.Map;
  * 1.0         	2020-02-20		kitlen			Create file
  * =========================================================================
  */
-@Controller()
+@Controller
 @RequestMapping("${server.error.path:${error.path:/error}}")
 public class CustomizeErrorController implements ErrorController {
 

@@ -4,6 +4,7 @@ import life.majiang.community.dto.PaginationDTO;
 import life.majiang.community.dto.QuestionDTO;
 import life.majiang.community.exception.CustomizeErrorCode;
 import life.majiang.community.exception.CustomizeException;
+import life.majiang.community.mapper.QuestionExtMapper;
 import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.mapper.UserMapper;
 import life.majiang.community.model.Question;
@@ -35,6 +36,8 @@ public class QuestionService {
     private UserMapper userMapper;
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
 
     public PaginationDTO list(Integer page, Integer size) {
@@ -119,7 +122,7 @@ public class QuestionService {
         if (dbQuestion == null ){
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
-            questionMapper.insert(question);
+            questionMapper.insertSelective(question);
         } else {
             question.setGmtModified(System.currentTimeMillis());
             int updated = questionMapper.updateByPrimaryKeySelective(question);
@@ -128,5 +131,13 @@ public class QuestionService {
             }
         }
 
+    }
+
+    /**
+     * 累计阅读数
+     * @param id
+     */
+    public void incView(Integer id) {
+        questionExtMapper.incView(id);
     }
 }
