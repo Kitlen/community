@@ -4,10 +4,14 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
+
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin">
         </plugin>
-
+        <!-- 整合lombok-->
+        <plugin type="com.chrm.mybatis.generator.plugins.LombokPlugin" >
+            <property name="hasLombok" value="true"/>
+        </plugin>
         <commentGenerator>
             <property name="suppressAllComments" value="true" />
         </commentGenerator>
@@ -40,6 +44,8 @@
         <table tableName="user" domainObjectName="User" >
         </table>
         <table tableName="question" domainObjectName="Question" >
+        </table>
+        <table tableName="comment" domainObjectName="Comment" >
         </table>
 <!--
         <table tableName="user" domainObjectName="User" >
