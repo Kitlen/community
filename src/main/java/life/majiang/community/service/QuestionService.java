@@ -69,7 +69,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public PaginationDTO list(Integer userId,Integer page, Integer size) {
+    public PaginationDTO list(Long userId,Integer page, Integer size) {
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         PaginationDTO paginationDTO = new PaginationDTO();
 
@@ -104,7 +104,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public QuestionDTO getById(Integer id) {
+    public QuestionDTO getById(Long id) {
 
         QuestionDTO questionDTO = new QuestionDTO();
         Question question = questionMapper.selectByPrimaryKey(id);
@@ -137,7 +137,7 @@ public class QuestionService {
      * 累计阅读数
      * @param id
      */
-    public void incView(Integer id) {
+    public void incView(Long id) {
         questionExtMapper.incView(id);
     }
 }

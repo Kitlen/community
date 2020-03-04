@@ -294,52 +294,52 @@ public class CommentExample {
             return (Criteria) this;
         }
 
-        public Criteria andCommentatorEqualTo(Integer value) {
+        public Criteria andCommentatorEqualTo(Long value) {
             addCriterion("COMMENTATOR =", value, "commentator");
             return (Criteria) this;
         }
 
-        public Criteria andCommentatorNotEqualTo(Integer value) {
+        public Criteria andCommentatorNotEqualTo(Long value) {
             addCriterion("COMMENTATOR <>", value, "commentator");
             return (Criteria) this;
         }
 
-        public Criteria andCommentatorGreaterThan(Integer value) {
+        public Criteria andCommentatorGreaterThan(Long value) {
             addCriterion("COMMENTATOR >", value, "commentator");
             return (Criteria) this;
         }
 
-        public Criteria andCommentatorGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCommentatorGreaterThanOrEqualTo(Long value) {
             addCriterion("COMMENTATOR >=", value, "commentator");
             return (Criteria) this;
         }
 
-        public Criteria andCommentatorLessThan(Integer value) {
+        public Criteria andCommentatorLessThan(Long value) {
             addCriterion("COMMENTATOR <", value, "commentator");
             return (Criteria) this;
         }
 
-        public Criteria andCommentatorLessThanOrEqualTo(Integer value) {
+        public Criteria andCommentatorLessThanOrEqualTo(Long value) {
             addCriterion("COMMENTATOR <=", value, "commentator");
             return (Criteria) this;
         }
 
-        public Criteria andCommentatorIn(List<Integer> values) {
+        public Criteria andCommentatorIn(List<Long> values) {
             addCriterion("COMMENTATOR in", values, "commentator");
             return (Criteria) this;
         }
 
-        public Criteria andCommentatorNotIn(List<Integer> values) {
+        public Criteria andCommentatorNotIn(List<Long> values) {
             addCriterion("COMMENTATOR not in", values, "commentator");
             return (Criteria) this;
         }
 
-        public Criteria andCommentatorBetween(Integer value1, Integer value2) {
+        public Criteria andCommentatorBetween(Long value1, Long value2) {
             addCriterion("COMMENTATOR between", value1, value2, "commentator");
             return (Criteria) this;
         }
 
-        public Criteria andCommentatorNotBetween(Integer value1, Integer value2) {
+        public Criteria andCommentatorNotBetween(Long value1, Long value2) {
             addCriterion("COMMENTATOR not between", value1, value2, "commentator");
             return (Criteria) this;
         }

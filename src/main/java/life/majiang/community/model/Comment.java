@@ -10,7 +10,7 @@ public class Comment {
 
     private Integer type;
 
-    private Integer commentator;
+    private Long commentator;
 
     private String content;
 

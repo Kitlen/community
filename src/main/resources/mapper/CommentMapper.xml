@@ -5,7 +5,7 @@
     <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="PARENT_ID" jdbcType="BIGINT" property="parentId" />
     <result column="TYPE" jdbcType="INTEGER" property="type" />
-    <result column="COMMENTATOR" jdbcType="INTEGER" property="commentator" />
+    <result column="COMMENTATOR" jdbcType="BIGINT" property="commentator" />
     <result column="CONTENT" jdbcType="VARCHAR" property="content" />
     <result column="LIKE_COUNT" jdbcType="BIGINT" property="likeCount" />
     <result column="GMT_CREATE" jdbcType="BIGINT" property="gmtCreate" />
@@ -107,7 +107,7 @@
       COMMENTATOR, CONTENT, LIKE_COUNT, 
       GMT_CREATE, GMT_MODIFIED)
     values (#{id,jdbcType=BIGINT}, #{parentId,jdbcType=BIGINT}, #{type,jdbcType=INTEGER}, 
-      #{commentator,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{likeCount,jdbcType=BIGINT}, 
+      #{commentator,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{likeCount,jdbcType=BIGINT}, 
       #{gmtCreate,jdbcType=BIGINT}, #{gmtModified,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="life.majiang.community.model.Comment">
@@ -149,7 +149,7 @@
         #{type,jdbcType=INTEGER},
       </if>
       <if test="commentator != null">
-        #{commentator,jdbcType=INTEGER},
+        #{commentator,jdbcType=BIGINT},
       </if>
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
@@ -184,7 +184,7 @@
         TYPE = #{record.type,jdbcType=INTEGER},
       </if>
       <if test="record.commentator != null">
-        COMMENTATOR = #{record.commentator,jdbcType=INTEGER},
+        COMMENTATOR = #{record.commentator,jdbcType=BIGINT},
       </if>
       <if test="record.content != null">
         CONTENT = #{record.content,jdbcType=VARCHAR},
@@ -208,7 +208,7 @@
     set ID = #{record.id,jdbcType=BIGINT},
       PARENT_ID = #{record.parentId,jdbcType=BIGINT},
       TYPE = #{record.type,jdbcType=INTEGER},
-      COMMENTATOR = #{record.commentator,jdbcType=INTEGER},
+      COMMENTATOR = #{record.commentator,jdbcType=BIGINT},
       CONTENT = #{record.content,jdbcType=VARCHAR},
       LIKE_COUNT = #{record.likeCount,jdbcType=BIGINT},
       GMT_CREATE = #{record.gmtCreate,jdbcType=BIGINT},
@@ -227,7 +227,7 @@
         TYPE = #{type,jdbcType=INTEGER},
       </if>
       <if test="commentator != null">
-        COMMENTATOR = #{commentator,jdbcType=INTEGER},
+        COMMENTATOR = #{commentator,jdbcType=BIGINT},
       </if>
       <if test="content != null">
         CONTENT = #{content,jdbcType=VARCHAR},
@@ -248,7 +248,7 @@
     update COMMENT
     set PARENT_ID = #{parentId,jdbcType=BIGINT},
       TYPE = #{type,jdbcType=INTEGER},
-      COMMENTATOR = #{commentator,jdbcType=INTEGER},
+      COMMENTATOR = #{commentator,jdbcType=BIGINT},
       CONTENT = #{content,jdbcType=VARCHAR},
       LIKE_COUNT = #{likeCount,jdbcType=BIGINT},
       GMT_CREATE = #{gmtCreate,jdbcType=BIGINT},

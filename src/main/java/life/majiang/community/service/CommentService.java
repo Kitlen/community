@@ -55,13 +55,13 @@ public class CommentService {
             BeanUtils.copyProperties(commentDto, dbComment);
             dbComment.setGmtCreate(System.currentTimeMillis());
             dbComment.setGmtModified(dbComment.getGmtCreate());
-            dbComment.setCommentator(0);
+            dbComment.setCommentator(0L);
             dbComment.setLikeCount(0L);
             commentMapper.insert(dbComment);
 
         } else {
             //回答问题
-            questionMapper.selectByPrimaryKey(commentDto.getParentId());
+//            questionMapper.selectByPrimaryKey(commentDto.getParentId());
 
 
 
@@ -75,7 +75,7 @@ public class CommentService {
         BeanUtils.copyProperties(comment, comment);
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setGmtModified(comment.getGmtCreate());
-        comment.setCommentator(0);
+        comment.setCommentator(0L);
         comment.setLikeCount(0L);
         commentMapper.insert(comment);
     }

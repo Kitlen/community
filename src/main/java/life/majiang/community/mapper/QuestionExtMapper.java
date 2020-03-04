@@ -8,5 +8,5 @@ import org.apache.ibatis.session.RowBounds;
 import java.util.List;
 
 public interface QuestionExtMapper {
-    void incView(Integer id);
+    void incView(Long id);
 }

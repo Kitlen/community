@@ -12,7 +12,7 @@
     <result column="LIKE_COUNT" jdbcType="INTEGER" property="likeCount" />
     <result column="TAG" jdbcType="VARCHAR" property="tag" />
   </resultMap>
-  <update id="incView" parameterType="java.lang.Integer">
+  <update id="incView" parameterType="java.lang.Long">
     update Question set VIEW_COUNT = VIEW_COUNT + 1 where id = #{id}
   </update>
 </mapper>
