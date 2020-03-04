@@ -22,7 +22,7 @@ public class ResultUtils {
     public static ResultBody success() {
         ResultBody resultBody = new ResultBody();
         resultBody.setCode(HttpStatus.OK.value());
-        resultBody.setMessage("成功");
+        resultBody.setMessage("请求成功");
         return resultBody;
     }
 

@@ -5,15 +5,18 @@ import life.majiang.community.enums.CommentTypeEnum;
 import life.majiang.community.exception.CustomizeErrorCode;
 import life.majiang.community.exception.CustomizeException;
 import life.majiang.community.mapper.CommentMapper;
+import life.majiang.community.mapper.QuestionExtMapper;
 import life.majiang.community.mapper.QuestionMapper;
 import life.majiang.community.model.Comment;
-import life.majiang.community.model.User;
-import life.majiang.community.result.ResultBody;
-import life.majiang.community.utils.ResultUtils;
+import life.majiang.community.model.Question;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.event.TransactionalEventListener;
+import org.springframework.transaction.interceptor.RuleBasedTransactionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,13 +38,23 @@ public class CommentService {
     private CommentMapper commentMapper;
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
+    private static final Log logger = LogFactory.getLog(CommentService.class);
+
+    /**
+     * 回复评论
+     * @param commentDto
+     * @param request
+     */
+    @Transactional(rollbackFor = Exception.class)
     public void insert(CommentDto commentDto, HttpServletRequest request) {
-        if (commentDto.getParentId() == null || commentDto.getParentId() == 0 ) {
+        if (commentDto.getParentId() == null || commentDto.getParentId() == 0) {
             throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
         }
 
-        if(commentDto.getType() == null || !CommentTypeEnum.isExist(commentDto.getType())) {
+        if (commentDto.getType() == null || !CommentTypeEnum.isExist(commentDto.getType())) {
             throw new CustomizeException(CustomizeErrorCode.TYPE_PARAM_ERROR);
         }
 
@@ -51,33 +64,25 @@ public class CommentService {
             if (dbComment == null) {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
-//            Comment dbComment = new Comment();
-            BeanUtils.copyProperties(commentDto, dbComment);
-            dbComment.setGmtCreate(System.currentTimeMillis());
-            dbComment.setGmtModified(dbComment.getGmtCreate());
-            dbComment.setCommentator(0L);
-            dbComment.setLikeCount(0L);
-            commentMapper.insert(dbComment);
-
         } else {
             //回答问题
-//            questionMapper.selectByPrimaryKey(commentDto.getParentId());
-
-
-
+            Question question = questionMapper.selectByPrimaryKey(commentDto.getParentId());
+            if (question == null) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
+            question.setCommentCount(1);
+            questionExtMapper.incCommentCount(question);
+            logger.info("OK");
         }
 
-//        User user = (User) request.getSession().getAttribute("user");
-        /*if (user == null) {
-            return ResultUtils.error():
-        }*/
-        Comment comment = new Comment();
-        BeanUtils.copyProperties(comment, comment);
-        comment.setGmtCreate(System.currentTimeMillis());
-        comment.setGmtModified(comment.getGmtCreate());
-        comment.setCommentator(0L);
-        comment.setLikeCount(0L);
-        commentMapper.insert(comment);
+        Comment dbComment = new Comment();
+        BeanUtils.copyProperties(commentDto, dbComment);
+        dbComment.setGmtCreate(System.currentTimeMillis());
+        dbComment.setGmtModified(dbComment.getGmtCreate());
+        dbComment.setCommentator(0L);
+        dbComment.setLikeCount(0L);
+        commentMapper.insert(dbComment);
+
     }
 
 }

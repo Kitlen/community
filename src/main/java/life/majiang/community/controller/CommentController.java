@@ -1,7 +1,9 @@
 package life.majiang.community.controller;
 
 import life.majiang.community.dto.CommentDto;
-import life.majiang.community.model.Comment;
+import life.majiang.community.exception.CustomizeErrorCode;
+import life.majiang.community.exception.CustomizeException;
+import life.majiang.community.model.User;
 import life.majiang.community.result.ResultBody;
 import life.majiang.community.service.CommentService;
 import life.majiang.community.utils.ResultUtils;
@@ -33,7 +35,12 @@ public class CommentController {
     @ResponseBody
     @PostMapping("/comment")
     public ResultBody post(@RequestBody CommentDto dto, HttpServletRequest request) {
-        commentService.insert(dto,request);
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            throw new CustomizeException(CustomizeErrorCode.NOT_LOGIN);
+        }
+        commentService.insert(dto, request);
+
         return ResultUtils.success();
     }
 }

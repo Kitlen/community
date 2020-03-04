@@ -135,9 +135,9 @@ public class QuestionService {
 
     /**
      * 累计阅读数
-     * @param id
+     * @param question
      */
-    public void incView(Long id) {
-        questionExtMapper.incView(id);
+    public void incView(Question question) {
+        questionExtMapper.incView(question);
     }
 }
