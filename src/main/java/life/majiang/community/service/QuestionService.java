@@ -109,7 +109,7 @@ public class QuestionService {
         QuestionDTO questionDTO = new QuestionDTO();
         Question question = questionMapper.selectByPrimaryKey(id);
         if (question == null){
-            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND.getMessage());
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
         }
         User writer = userMapper.selectByPrimaryKey(question.getCreator());
         BeanUtils.copyProperties(question, questionDTO);
@@ -127,7 +127,7 @@ public class QuestionService {
             question.setGmtModified(System.currentTimeMillis());
             int updated = questionMapper.updateByPrimaryKeySelective(question);
             if(updated != 1) {
-                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND.getMessage());
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
         }
 
