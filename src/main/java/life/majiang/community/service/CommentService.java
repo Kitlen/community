@@ -72,7 +72,6 @@ public class CommentService {
             }
             question.setCommentCount(1);
             questionExtMapper.incCommentCount(question);
-            logger.info("OK");
         }
 
         Comment dbComment = new Comment();
